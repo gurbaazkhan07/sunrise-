@@ -1,0 +1,102 @@
+/* ==========================================================
+   Sunrise Tea – mobile-friendly buttons
+   Loaded AFTER styles.css, so these rules take priority.
+   ========================================================== */
+
+/* ---------- 1. All screens: better tap behaviour ---------- */
+button,
+.btn,
+.flip,
+.sz button,
+.qty button,
+.x,
+.rm,
+.fab,
+summary,
+nav a {
+  touch-action: manipulation;              /* no 300 ms double-tap-zoom delay */
+  -webkit-tap-highlight-color: transparent; /* no grey flash on tap */
+}
+
+/* Long labels such as "WhatsApp did not open? Tap here" wrap instead of overflowing */
+.btn {
+  text-align: center;
+  line-height: 1.2;
+  white-space: normal;
+}
+.btn.add { white-space: nowrap; }
+
+/* Pressed feedback (works on touch, where :hover does not) */
+.btn:active,
+.flip:active,
+.sz button:active,
+.cartbtn:active,
+.menu:active { transform: scale(.96); }
+.qty button:active { background: #ffe97a; }
+
+/* Touch screens have no real hover: stop buttons "sticking" in the raised state */
+@media (hover: none) {
+  .btn:hover { transform: none; }
+  nav a:hover { background: none; }
+}
+
+/* ---------- 2. Touch devices: bigger tap targets (44 px+) ---------- */
+@media (pointer: coarse) {
+  .qty button { min-width: 44px; min-height: 44px; }
+  .ln .qty button { min-width: 40px; width: 40px; height: 40px; }
+  .ln .qty input { width: 44px; min-height: 40px; }
+  .sz button { min-height: 40px; }
+  .flip { min-height: 36px; padding: 4px 14px; }
+  .rm { min-height: 40px; padding: 10px 4px; }
+  .x { width: 48px; height: 48px; }
+  .pk .ck input { width: 24px; height: 24px; }
+  .foot summary { min-height: 44px; display: flex; align-items: center; }
+}
+
+/* ---------- 3. Tablets and phones (up to 860 px) ---------- */
+@media (max-width: 860px) {
+  .btn { min-height: 48px; }
+  nav a { min-height: 48px; display: flex; align-items: center; font-size: 1.1rem; }
+  .cartbtn,
+  .menu { padding: 6px 12px; }
+}
+
+/* ---------- 4. Phones (up to 600 px) ---------- */
+@media (max-width: 600px) {
+  /* Hero buttons: two per row, the bulk button full width at the bottom */
+  .heroCta {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .heroCta .btn { width: 100%; padding: 10px 8px; font-size: 1rem; }
+  .heroCta .btn:first-child { grid-column: auto; }
+  .heroCta .btn.bulkBtn { grid-column: 1 / -1; }
+
+  /* Buttons inside forms, the cart drawer and contact boxes: full width, easy to tap */
+  form .btn,
+  .box .btn { width: 100%; }
+  .box .cta { flex-direction: column; }
+  .box .cta .btn { width: 100%; }
+}
+
+/* ---------- 5. Small phones (up to 380 px) ---------- */
+@media (max-width: 380px) {
+  header .wrap { gap: 8px; }
+  .logo img { height: 44px; }
+  .cartbtn,
+  .menu { padding: 4px 10px; font-size: .95rem; }
+  .heroCta .btn { font-size: .92rem; padding: 8px 6px; }
+}
+
+/* ---------- 6. Related small fixes found while testing on a phone ---------- */
+/* Cart title was purple on a purple bar */
+aside > header h2 { color: #fff; }
+
+/* "Added to cart" message: no longer squeezed into a narrow blob */
+.toast {
+  width: max-content;
+  max-width: calc(100vw - 32px);
+  text-align: center;
+  border-radius: 20px;
+}
