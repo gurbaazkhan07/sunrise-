@@ -72,7 +72,7 @@ if(!okPhone(f.get("phone"))){er.textContent="Enter a valid mobile number, for ex
 if(!f.get("addr").trim()){er.textContent="Enter the delivery address.";return}er.textContent="";
 let kg=0,pk=0,tot=0;const L=ids.map((id,n)=>{const p=byId(id),q=cart[id];if(p.u==="pack")pk+=q;else kg+=q;tot+=q*p.p;return`${n+1}. ${p.n} – ${q} ${UN(p,q)} × ${fmt(p.p)} = ${fmt(q*p.p)}`});
 const d=new Date().toLocaleString("en-IN",{dateStyle:"medium",timeStyle:"short"});
-send(`*New order – Sunrise Tea*\n${d}\n\n*Items*\n${L.join("\n")}\n\nItems: ${fmt(tot)}\n*Total: ${fmt(tot)}* (delivery charges included) (${+WT(ids).toFixed(2)} kg total)\n\n*Customer*\nName: ${f.get("name").trim()}\nMobile: ${f.get("phone").trim()}${f.get("biz").trim()?"\nBusiness: "+f.get("biz").trim():""}\nAddress: ${f.get("addr").trim()}${f.get("note").trim()?"\nNote: "+f.get("note").trim():""}\n\nPlease confirm availability, delivery and final amount.`,$("#ordLink"))});
+send(`*New order – Sunrise Tea*\n${d}\n\n*Items*\n${L.join("\n")}\n\nItems: ${fmt(tot)}\n*Total: ${fmt(tot)}* (without delivery charges) (${+WT(ids).toFixed(2)} kg total)\n\n*Customer*\nName: ${f.get("name").trim()}\nMobile: ${f.get("phone").trim()}${f.get("biz").trim()?"\nBusiness: "+f.get("biz").trim():""}\nAddress: ${f.get("addr").trim()}${f.get("note").trim()?"\nNote: "+f.get("note").trim():""}\n\nPlease confirm availability, delivery and final amount.`,$("#ordLink"))});
 $("#enq").addEventListener("submit",e=>{e.preventDefault();const f=new FormData(e.target),er=$("#enqErr");
 if(!f.get("name").trim()){er.textContent="Enter your name.";return}
 if(!okPhone(f.get("phone"))){er.textContent="Enter a valid mobile number, for example 99249 83251.";return}
